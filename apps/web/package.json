@@ -1,9 +1,9 @@
 {
-	"name": "admin-web",
+	"name": "web",
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"dev": "next dev --port 3001",
+		"dev": "next dev --port 3000",
 		"build": "next build",
 		"start": "next start",
 		"lint": "next lint"
@@ -11,8 +11,7 @@
 	"dependencies": {
 		"react": "^18",
 		"react-dom": "^18",
-		"next": "14.0.3",
-		"tailwind-config": "*"
+		"next": "14.0.3"
 	},
 	"devDependencies": {
 		"typescript": "^5",
@@ -25,6 +24,7 @@
 		"eslint": "^8",
 		"eslint-config-next": "14.0.3",
 		"@repo/eslint-config": "*",
-		"@repo/typescript-config": "*"
+		"@repo/typescript-config": "*",
+		"tailwind-config": "*"
 	}
 }

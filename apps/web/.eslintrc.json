@@ -1,7 +1,7 @@
 {
 	"extends": "@repo/eslint-config/next.js",
-	"root": true,
 	"parser": "@typescript-eslint/parser",
+	"root": true,
 	"parserOptions": {
 		"project": true
 	}
