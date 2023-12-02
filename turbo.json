@@ -21,6 +21,16 @@
 				".env.local.production",
 				".env.staging"
 			]
+		},
+		"db:generate": {
+			"dependsOn": ["^db:generate"],
+			"cache": false,
+			"dotEnv": [".env", ".env.production"]
+		},
+		"db:migrate": {
+			"dependsOn": ["^db:generate"],
+			"cache": false,
+			"dotEnv": [".env", ".env.production"]
 		}
 	}
 }

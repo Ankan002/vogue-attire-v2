@@ -2,7 +2,8 @@
 	"name": "tailwind-config",
 	"version": "0.0.0",
 	"exports": {
-		".": "./tailwind-config.ts"
+		".": "./tailwind-config.ts",
+		"./font": "./css/fonts.css"
 	},
 	"devDependencies": {
 		"tailwindcss": "^3.3.5"
