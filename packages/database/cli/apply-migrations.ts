@@ -1,3 +1,4 @@
+import { executeShellCommand } from "helpers/execute-shell-command";
 import { getTextInput } from "helpers/get-text-input";
 import { getHeading, getWarning } from "utils/get-heading";
 
@@ -31,9 +32,33 @@ const applyMigrations = async () => {
 			key: "migrationFolderName",
 		});
 
-		console.log(devDatabaseName);
-		console.log(prodDatabaseName);
-		console.log(migrationFolderName);
+		console.log(`⌛ Applying migration on dev database ${devDatabaseName}`);
+
+		await executeShellCommand({
+			command: `turso db shell ${
+				devDatabaseName === ".env"
+					? process.env["DEV_DB_NAME"]
+					: devDatabaseName
+			} < prisma/migrations/${migrationFolderName}/migration.sql`,
+		});
+
+		console.log(`✅ Applied migration to dev database ${devDatabaseName}`);
+
+		console.log(
+			`⌛ Applying migration on production database ${prodDatabaseName}`,
+		);
+
+		await executeShellCommand({
+			command: `turso db shell ${
+				prodDatabaseName === ".env"
+					? process.env["PROD_DB_NAME"]
+					: prodDatabaseName
+			} < prisma/migrations/${migrationFolderName}/migration.sql`,
+		});
+
+		console.log(
+			`✅ Applied migration to production database ${prodDatabaseName}`,
+		);
 	} catch (error) {
 		if (error instanceof Error) {
 			console.log(`Error: ${error.message}`);
