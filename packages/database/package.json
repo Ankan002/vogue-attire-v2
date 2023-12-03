@@ -1,15 +1,27 @@
 {
 	"name": "database",
 	"version": "0.0.0",
+	"type": "module",
+	"license": "MIT",
+	"exports": {
+		".": "./client.ts"
+	},
 	"scripts": {
 		"db:migrate": "npx prisma migrate dev --name dev_migrations",
-		"db:generate": "npx primsa generate"
+		"db:generate": "npx prisma generate",
+		"apply-migration": "bun cli/apply-migrations.ts"
 	},
 	"devDependencies": {
+		"@types/inquirer": "^9.0.7",
+		"inquirer": "^9.2.12",
 		"prisma": "^5.6.0"
 	},
 	"dependencies": {
+		"@libsql/client": "^0.4.0-pre.5",
+		"@prisma/adapter-libsql": "^5.6.0",
 		"@prisma/client": "^5.6.0",
+		"@repo/typescript-config": "*",
+		"dotenv": "^16.3.1",
 		"dotenv-cli": "^7.3.0"
 	}
 }
