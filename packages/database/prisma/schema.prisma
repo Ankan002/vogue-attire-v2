@@ -12,6 +12,39 @@ datasource db {
 }
 
 model Admin {
-  id   String @id @default(cuid())
-  name String
+  id         String   @id @default(cuid())
+  name       String
+  email      String   @unique
+  password   String
+  is_active  Boolean  @default(true)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model User {
+  id          String    @id @default(cuid())
+  name        String
+  email       String    @unique
+  username    String    @unique
+  provider_id String    @unique
+  avatar      String?
+  is_active   Boolean   @default(true)
+  is_banned   Boolean   @default(false)
+  created_at  DateTime  @default(now())
+  updated_at  DateTime  @updatedAt
+  addresses   Address[]
+}
+
+model Address {
+  id             String @id @default(cuid())
+  recipient_name String
+  house_number   String
+  area           String
+  city           String
+  pincode        String
+  state          String
+  landmark       String
+  phone_number   String
+  user           User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id        String
 }
