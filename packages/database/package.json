@@ -12,7 +12,9 @@
 		"apply-migration": "bun cli/apply-migrations.ts"
 	},
 	"devDependencies": {
+		"@types/gradient-string": "^1.1.5",
 		"@types/inquirer": "^9.0.7",
+		"gradient-string": "^2.0.2",
 		"inquirer": "^9.2.12",
 		"prisma": "^5.6.0"
 	},

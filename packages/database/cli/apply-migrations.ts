@@ -1,14 +1,14 @@
 import { getTextInput } from "helpers/get-text-input";
+import { getHeading, getWarning } from "utils/get-heading";
 
 const applyMigrations = async () => {
+	console.log(getHeading("****************************"));
+	console.log(getHeading("WElCOME TO THE MIGRATION CLI"));
+	console.log(getHeading("****************************"));
 	console.log(
-		"********************************************************************",
-	);
-	console.log(
-		"NOTE: Install Turso CLI and login to the account you ant to access!!",
-	);
-	console.log(
-		"********************************************************************",
+		getWarning(
+			"NOTE: Install Turso CLI and login to the account you ant to access!!",
+		),
 	);
 
 	try {
@@ -26,8 +26,14 @@ const applyMigrations = async () => {
 			key: "prodDatabaseName",
 		});
 
+		const migrationFolderName = await getTextInput({
+			question: "Enter folder Name: ",
+			key: "migrationFolderName",
+		});
+
 		console.log(devDatabaseName);
 		console.log(prodDatabaseName);
+		console.log(migrationFolderName);
 	} catch (error) {
 		if (error instanceof Error) {
 			console.log(`Error: ${error.message}`);
