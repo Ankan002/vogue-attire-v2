@@ -32,7 +32,13 @@ const applyMigrations = async () => {
 			key: "migrationFolderName",
 		});
 
-		console.log(`⌛ Applying migration on dev database ${devDatabaseName}`);
+		console.log(
+			`⌛ Applying migration on dev database ${
+				devDatabaseName === ".env"
+					? process.env["DEV_DB_NAME"]
+					: devDatabaseName
+			}`,
+		);
 
 		await executeShellCommand({
 			command: `turso db shell ${
@@ -42,10 +48,20 @@ const applyMigrations = async () => {
 			} < prisma/migrations/${migrationFolderName}/migration.sql`,
 		});
 
-		console.log(`✅ Applied migration to dev database ${devDatabaseName}`);
+		console.log(
+			`✅ Applied migration to dev database ${
+				devDatabaseName === ".env"
+					? process.env["DEV_DB_NAME"]
+					: devDatabaseName
+			}`,
+		);
 
 		console.log(
-			`⌛ Applying migration on production database ${prodDatabaseName}`,
+			`⌛ Applying migration on production database ${
+				prodDatabaseName === ".env"
+					? process.env["PROD_DB_NAME"]
+					: prodDatabaseName
+			}`,
 		);
 
 		await executeShellCommand({
@@ -57,7 +73,11 @@ const applyMigrations = async () => {
 		});
 
 		console.log(
-			`✅ Applied migration to production database ${prodDatabaseName}`,
+			`✅ Applied migration to production database ${
+				prodDatabaseName === ".env"
+					? process.env["PROD_DB_NAME"]
+					: prodDatabaseName
+			}`,
 		);
 	} catch (error) {
 		if (error instanceof Error) {

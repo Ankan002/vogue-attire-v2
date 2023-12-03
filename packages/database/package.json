@@ -10,7 +10,8 @@
 		"db:migrate-only": "npx prisma migrate dev --name dev_migrations",
 		"db:migrate": "npx prisma migrate dev --name dev_migrations && bun cli/apply-migrations.ts",
 		"db:generate": "npx prisma generate",
-		"apply-migration": "bun cli/apply-migrations.ts"
+		"apply-migration": "bun cli/apply-migrations.ts",
+		"apply-migration:all": "bun cli/apply-all-migrations.ts"
 	},
 	"devDependencies": {
 		"@types/gradient-string": "^1.1.5",
