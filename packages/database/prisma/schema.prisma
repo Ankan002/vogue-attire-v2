@@ -19,17 +19,20 @@ model Admin {
 }
 
 model User {
-  id          String    @id @default(cuid())
-  name        String
-  email       String    @unique
-  username    String    @unique
-  provider_id String    @unique
-  avatar      String?
-  is_active   Boolean   @default(true)
-  is_banned   Boolean   @default(false)
-  created_at  DateTime  @default(now())
-  updated_at  DateTime  @updatedAt
-  addresses   Address[]
+  id             String         @id @default(cuid())
+  name           String
+  email          String         @unique
+  username       String         @unique
+  provider_id    String         @unique
+  avatar         String?
+  is_active      Boolean        @default(true)
+  is_banned      Boolean        @default(false)
+  created_at     DateTime       @default(now())
+  updated_at     DateTime       @updatedAt
+  addresses      Address[]
+  orders         Order[]
+  cart_items     CartItem[]
+  wishlist_items WishlistItem[]
 }
 
 model Address {
@@ -62,6 +65,16 @@ model Attribute {
   product_item_attributes ProductItemAttribute[]
 }
 
+model Tax {
+  id               String         @id @default(cuid())
+  name             String
+  description      String
+  created_at       DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  product_taxes    ProductTax[]
+  order_item_taxes OrderItemTax[]
+}
+
 model Product {
   id            String               @id @default(cuid())
   name          String
@@ -72,6 +85,18 @@ model Product {
   updated_at    DateTime             @updatedAt
   category_tags ProductCategoryTag[]
   product_items ProductItem[]
+  taxes         ProductTax[]
+}
+
+model ProductTax {
+  id          String   @id @default(cuid())
+  tax         Tax      @relation(fields: [tax_id], references: [id], onDelete: Cascade)
+  tax_id      String
+  product     Product  @relation(fields: [product_id], references: [id], onDelete: Cascade)
+  product_id  String
+  tax_percent Float
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
 }
 
 model ProductCategoryTag {
@@ -92,6 +117,7 @@ model ProductItem {
   product_id              String
   product_image           String?
   price                   Float
+  marked_price            Float
   currency                String                 @default("INR")
   in_stock                Boolean                @default(true)
   is_published            Boolean                @default(false)
@@ -100,6 +126,7 @@ model ProductItem {
   product_item_attributes ProductItemAttribute[]
   cart_items              CartItem[]
   wishlist_items          WishlistItem[]
+  order_items             OrderItem[]
 }
 
 model ProductItemAttribute {
@@ -117,6 +144,8 @@ model CartItem {
   id              String      @id @default(cuid())
   product_item    ProductItem @relation(fields: [product_item_id], references: [id], onDelete: Cascade)
   product_item_id String
+  user            User        @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id         String
   quantity        Int
   created_at      DateTime    @default(now())
   updated_at      DateTime    @updatedAt
@@ -126,6 +155,46 @@ model WishlistItem {
   id              String      @id @default(cuid())
   product_item    ProductItem @relation(fields: [product_item_id], references: [id], onDelete: Cascade)
   product_item_id String
+  user            User        @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id         String
   created_at      DateTime    @default(now())
   updated_at      DateTime    @updatedAt
+}
+
+// TODO: Needs to update the Order with taxation and other price details, along with payment gateway. Also add default states for order status.
+model Order {
+  id              String   @id @default(cuid())
+  user            User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id         String
+  delivery_charge Float
+  total_tax       Float
+  total_amount    Float
+  currency        String   @default("INR")
+  status          String
+  created_at      DateTime @default(now())
+  updated_at      DateTime @updatedAt
+}
+
+model OrderItem {
+  id               String         @id @default(cuid())
+  product_item     ProductItem?   @relation(fields: [product_item_id], references: [id], onDelete: SetNull)
+  product_item_id  String?
+  product_name     String
+  quantity         Int
+  price            Int
+  currency         String         @default("INR")
+  created_at       DateTime       @default(now())
+  updated_at       DateTime       @updatedAt
+  order_item_taxes OrderItemTax[]
+}
+
+model OrderItemTax {
+  id            String    @id @default(cuid())
+  tax           Tax       @relation(fields: [tax_id], references: [id], onDelete: Cascade)
+  tax_id        String
+  order_item    OrderItem @relation(fields: [order_item_id], references: [id], onDelete: Cascade)
+  order_item_id String
+  tax_percent   Float
+  created_at    DateTime  @default(now())
+  updated_at    DateTime  @updatedAt
 }
