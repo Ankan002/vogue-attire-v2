@@ -161,19 +161,21 @@ model WishlistItem {
   updated_at      DateTime    @updatedAt
 }
 
-// TODO: Confirm transacion id scenario once done
 model Order {
-  id              String   @id @default(cuid())
-  user            User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
-  user_id         String
-  transaction_id  String?
-  delivery_charge Float
-  total_tax       Float
-  total_amount    Float
-  currency        String   @default("INR")
-  status          String
-  created_at      DateTime @default(now())
-  updated_at      DateTime @updatedAt
+  id                  String   @id @default(cuid())
+  user                User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id             String
+  razorpay_order_id   String
+  razorpay_payment_id String?
+  payment_method              String?
+  payment_status      String   @default("initiated")
+  delivery_charge     Float
+  total_tax           Float
+  total_amount        Float
+  currency            String   @default("INR")
+  status              String   @default("pending")
+  created_at          DateTime @default(now())
+  updated_at          DateTime @updatedAt
 }
 
 model OrderItem {
