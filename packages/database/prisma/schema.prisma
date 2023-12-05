@@ -167,7 +167,7 @@ model Order {
   user_id             String
   razorpay_order_id   String
   razorpay_payment_id String?
-  payment_method              String?
+  payment_method      String?
   payment_status      String   @default("initiated")
   delivery_charge     Float
   total_tax           Float
