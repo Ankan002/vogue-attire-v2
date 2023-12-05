@@ -161,11 +161,12 @@ model WishlistItem {
   updated_at      DateTime    @updatedAt
 }
 
-// TODO: Needs to update the Order with taxation and other price details, along with payment gateway. Also add default states for order status.
+// TODO: Confirm transacion id scenario once done
 model Order {
   id              String   @id @default(cuid())
   user            User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
   user_id         String
+  transaction_id  String?
   delivery_charge Float
   total_tax       Float
   total_amount    Float
