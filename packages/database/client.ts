@@ -21,3 +21,5 @@ export const getPrismaClient = (args: Args) => {
 
 	return prismaClient;
 };
+
+export { PrismaClient, PrismaLibSQL };
