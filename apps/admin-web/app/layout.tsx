@@ -4,6 +4,7 @@ import { GeistMono } from "geist/font/mono";
 import "./globals.css";
 import { RecoilProvider, ReactQueryProvider } from "common-providers";
 import { ThemeProvider } from "@/components/providers";
+import { ThemeToggleBtn } from "@/components/common";
 
 export const metadata: Metadata = {
 	title: "Create Next App",
@@ -20,7 +21,10 @@ export default function RootLayout({
 			<body className={`${GeistSans.variable} ${GeistMono.variable}`}>
 				<ReactQueryProvider>
 					<RecoilProvider>
-						<ThemeProvider>{children}</ThemeProvider>
+						<ThemeProvider>
+							{children}
+							<ThemeToggleBtn />
+						</ThemeProvider>
 					</RecoilProvider>
 				</ReactQueryProvider>
 			</body>

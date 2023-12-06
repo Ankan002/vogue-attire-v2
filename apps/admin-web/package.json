@@ -12,6 +12,7 @@
 		"common-providers": "*",
 		"database": "*",
 		"geist": "^1.2.0",
+		"lucide-react": "^0.294.0",
 		"next": "14.0.3",
 		"react": "^18",
 		"react-dom": "^18",
@@ -30,7 +31,7 @@
 		"eslint-config-next": "14.0.3",
 		"postcss": "^8",
 		"tailwindcss": "^3.3.0",
-		"typescript": "^5",
-		"types": "*"
+		"types": "*",
+		"typescript": "^5"
 	}
 }

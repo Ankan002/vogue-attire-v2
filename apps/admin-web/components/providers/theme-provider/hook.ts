@@ -10,8 +10,6 @@ export const useThemeProvider = () => {
 	const onAppLoad = () => {
 		const prevSavedTheme = localStorage.getItem("theme");
 
-		console.log(prevSavedTheme);
-
 		if (
 			prevSavedTheme === null ||
 			(prevSavedTheme !== "dark" && prevSavedTheme !== "light")
