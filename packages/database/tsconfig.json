@@ -1,0 +1,16 @@
+{
+	"extends": ["@repo/typescript-config/base.json"],
+	"compilerOptions": {
+		"module": "ES2022",
+		"moduleResolution": "Bundler",
+		"baseUrl": ".",
+		"paths": {
+			"utils/*": ["./utils/*"],
+			"helpers/*": ["./helpers/*"]
+		}
+	},
+	"ts-node": {
+		"esm": true,
+		"compiler": "typescript"
+	}
+}
