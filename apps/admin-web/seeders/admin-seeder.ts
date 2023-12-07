@@ -1,4 +1,3 @@
-import "dotenv/config";
 import { getDbInstance } from "@/config";
 import { genSalt, hash } from "bcrypt";
 
