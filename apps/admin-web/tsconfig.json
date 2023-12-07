@@ -16,6 +16,6 @@
 		"**/*.tsx",
 		".next/types/**/*.ts",
 		"next.config.js"
-	],
+, "seeders/admin-seeder.ts"	],
 	"exclude": ["node_modules"]
 }

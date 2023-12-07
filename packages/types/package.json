@@ -1,0 +1,12 @@
+{
+	"name": "types",
+	"license": "MIT",
+	"version": "0.0.0",
+	"exports": {
+		"./common": "./common/index.ts"
+	},
+	"devDependencies": {
+		"typescript": "^5.3.2",
+		"@repo/typescript-config": "*"
+	}
+}
