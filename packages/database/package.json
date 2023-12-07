@@ -4,26 +4,28 @@
 	"type": "module",
 	"license": "MIT",
 	"exports": {
-		".": "./client.ts"
+		".": "./index.ts"
 	},
 	"scripts": {
-		"db:migrate-only": "npx prisma migrate dev --name dev_migrations",
-		"db:migrate": "npx prisma migrate dev --name dev_migrations && bun cli/apply-migrations.ts",
+		"db:migrate-only-sqlite": "npx prisma migrate dev --name dev_migrations",
+		"db:migrate-sqlite": "npx prisma migrate dev --name dev_migrations && bun cli/apply-migrations.ts",
+		"apply-migration-turso": "bun cli/apply-migrations.ts",
+		"apply-migration-turso:all": "bun cli/apply-all-migrations.ts",
 		"db:generate": "npx prisma generate",
-		"apply-migration": "bun cli/apply-migrations.ts",
-		"apply-migration:all": "bun cli/apply-all-migrations.ts"
+		"db:push-dev": "npx prisma db push",
+		"db:push": "npx prisma db push --accept-data-loss"
 	},
 	"devDependencies": {
 		"@types/gradient-string": "^1.1.5",
 		"@types/inquirer": "^9.0.7",
 		"gradient-string": "^2.0.2",
 		"inquirer": "^9.2.12",
-		"prisma": "^5.6.0"
+		"prisma": "^5.7.0"
 	},
 	"dependencies": {
 		"@libsql/client": "^0.4.0-pre.5",
 		"@prisma/adapter-libsql": "^5.6.0",
-		"@prisma/client": "^5.6.0",
+		"@prisma/client": "^5.7.0",
 		"@repo/typescript-config": "*",
 		"dotenv-cli": "^7.3.0"
 	}

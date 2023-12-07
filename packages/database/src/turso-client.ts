@@ -7,7 +7,8 @@ interface Args {
 	authToken: string;
 }
 
-export const getPrismaClient = (args: Args) => {
+// ! NOTE: To use this project with libsql or turso turn on the adapter property. Or update as required at that point in time.
+export const getTursoPrismaClient = (args: Args) => {
 	const { databaseUrl, authToken } = args;
 
 	const libSqlClient = createClient({
@@ -16,10 +17,9 @@ export const getPrismaClient = (args: Args) => {
 	});
 	const adapter = new PrismaLibSQL(libSqlClient);
 	const prismaClient = new PrismaClient({
-		adapter,
+		// adapter,
+
 	});
 
 	return prismaClient;
 };
-
-export { PrismaClient, PrismaLibSQL };

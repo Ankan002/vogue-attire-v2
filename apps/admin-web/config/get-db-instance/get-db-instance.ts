@@ -1,12 +1,10 @@
-import { getPrismaClient, PrismaClient, PrismaLibSQL } from "database";
+import { getTursoPrismaClient, PrismaClient } from "database";
 
-let prismaClient: PrismaClient<{
-	adapter: PrismaLibSQL;
-}> | null = null;
+let prismaClient: PrismaClient | null = null;
 
 export const getDbInstance = () => {
 	if (!prismaClient) {
-		prismaClient = getPrismaClient({
+		prismaClient = getTursoPrismaClient({
 			authToken: process.env["DB_AUTH_TOKEN"] ?? "",
 			databaseUrl: process.env["DB_URI"] ?? "",
 		});

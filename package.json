@@ -6,7 +6,8 @@
 		"dev": "turbo dev",
 		"lint": "turbo lint",
 		"format": "prettier --write \"**/*.{ts,tsx,md}\"",
-		"build:admin-web": "npx turbo run build --scope=admin-web --include-dependencies --no-deps"
+		"build:admin-web": "npx turbo run build --scope=admin-web --include-dependencies --no-deps",
+		"build:admin-db-web": "cd packages/database && yarn db:push && cd ../.. && npx turbo run build --scope=admin-web --include-dependencies --no-deps"
 	},
 	"devDependencies": {
 		"@repo/eslint-config": "*",
