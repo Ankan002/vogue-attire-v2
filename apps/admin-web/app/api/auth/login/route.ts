@@ -110,14 +110,18 @@ export const POST = async (req: NextRequest) => {
 			},
 		);
 
-		response.cookies.set("auth-token", jwtToken, {
-			httpOnly: true,
-			secure: process.env["ENV"] === "production",
-			expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 365),
-            
-            // ! If we further extend our functionality to beyond a single domain we would need to set this explicitly. But as of now we do not need so.
-			// domain: process.env["COOKIE_DOMAIN"],
-		});
+		response.cookies.set(
+			process.env["COOKIE_NAME"] ?? "auth-token",
+			jwtToken,
+			{
+				httpOnly: true,
+				secure: process.env["ENV"] === "production",
+				expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 365),
+
+				// ! If we further extend our functionality to beyond a single domain we would need to set this explicitly. But as of now we do not need so.
+				// domain: process.env["COOKIE_DOMAIN"],
+			},
+		);
 
 		return response;
 	} catch (error) {
