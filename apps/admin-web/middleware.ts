@@ -19,12 +19,12 @@ export const middleware = (request: NextRequest) => {
 		for (const route of unprotected_api_routes) {
 			if (currentRoute === route) {
 				if (cookie) {
-					return new NextResponse(
-						JSON.stringify({
+					return NextResponse.json(
+						{
 							success: false,
 							error: "You are already logged in, you should not be logged in to access here!!",
 							status: 401,
-						}),
+						},
 						{
 							status: 401,
 						},
@@ -38,12 +38,12 @@ export const middleware = (request: NextRequest) => {
 		for (const route of protected_api_route_matchers) {
 			if (currentRoute.startsWith(route)) {
 				if (cookie) return NextResponse.next();
-				return new NextResponse(
-					JSON.stringify({
+				return NextResponse.json(
+					{
 						success: false,
 						error: "Access Denied!!",
 						status: 401,
-					}),
+					},
 					{
 						status: 401,
 					},
@@ -54,12 +54,12 @@ export const middleware = (request: NextRequest) => {
 		for (const route of protected_api_routes) {
 			if (currentRoute === route) {
 				if (cookie) return NextResponse.next();
-				return new NextResponse(
-					JSON.stringify({
+				return NextResponse.json(
+					{
 						success: false,
 						error: "Access Denied!!",
 						status: 401,
-					}),
+					},
 					{
 						status: 401,
 					},

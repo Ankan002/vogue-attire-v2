@@ -1,8 +1,9 @@
 import { getDbInstance } from "@/config";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { z } from "zod";
 import { compare } from "bcrypt";
 import jwt from "jsonwebtoken";
+import { Controller } from "types/api";
 
 const PostBodySchema = z.object({
 	email: z.string().email("Please provide a valid email"),
@@ -12,7 +13,7 @@ const PostBodySchema = z.object({
 		.max(30, "Password should be at most 30 characters long"),
 });
 
-export const POST = async (req: NextRequest) => {
+export const POST: Controller<Body> = async (req) => {
 	try {
 		const requestBody = await req.json();
 
@@ -20,11 +21,11 @@ export const POST = async (req: NextRequest) => {
 
 		if (!bodyValidationResult.success) {
 			return NextResponse.json(
-				JSON.stringify({
+				{
 					success: false,
-					error: bodyValidationResult.error.errors[0]?.message,
+					error: bodyValidationResult.error.errors[0]?.message ?? "",
 					code: 400,
-				}),
+				},
 				{
 					status: 400,
 				},
@@ -48,11 +49,11 @@ export const POST = async (req: NextRequest) => {
 
 		if (!admin) {
 			return NextResponse.json(
-				JSON.stringify({
+				{
 					success: false,
 					error: "No User Found!!",
 					code: 401,
-				}),
+				},
 				{
 					status: 401,
 				},
@@ -61,11 +62,11 @@ export const POST = async (req: NextRequest) => {
 
 		if (!admin.is_active) {
 			return NextResponse.json(
-				JSON.stringify({
+				{
 					success: false,
 					error: "You are not an active admin access denied!!",
 					code: 401,
-				}),
+				},
 				{
 					status: 401,
 				},
@@ -79,11 +80,11 @@ export const POST = async (req: NextRequest) => {
 
 		if (!isPasswordCorrect) {
 			return NextResponse.json(
-				JSON.stringify({
+				{
 					success: false,
 					error: "Incorrect Credentials access denied!!",
 					code: 401,
-				}),
+				},
 				{
 					status: 401,
 				},
@@ -100,11 +101,11 @@ export const POST = async (req: NextRequest) => {
 			process.env["JWT_SECRET"] ?? "",
 		);
 
-		const response = new NextResponse(
-			JSON.stringify({
+		const response = NextResponse.json(
+			{
 				success: true,
 				code: 200,
-			}),
+			},
 			{
 				status: 200,
 			},
@@ -127,28 +128,28 @@ export const POST = async (req: NextRequest) => {
 	} catch (error) {
 		if (error instanceof Error) {
 			return NextResponse.json(
-				JSON.stringify({
+				{
 					success: false,
 					error: error.message,
 					code: 400,
-				}),
+				},
 				{
 					status: 400,
 				},
-			);
+			).json();
 		}
 
 		console.log(error);
 
 		return NextResponse.json(
-			JSON.stringify({
+			{
 				success: false,
 				error: "Internal Server Error",
 				code: 500,
-			}),
+			},
 			{
 				status: 500,
 			},
-		);
+		).json();
 	}
 };
