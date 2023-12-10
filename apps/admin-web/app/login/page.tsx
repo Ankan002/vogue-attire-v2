@@ -1,5 +1,4 @@
-import { BrandLogo } from "@/components/common";
-import { LoginHero } from "@/components/login-page";
+import { LoginHero, LoginSection } from "@/components/login-page";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -10,9 +9,7 @@ const LoginPage = () => {
 	return (
 		<main className="w-full min-h-screen flex flex-col bg-primary-light dark:bg-primary-dark font-geist-sans">
 			<div className="w-full min-h-screen flex">
-				<div className="flex-1 flex flex-col min-h-screen px-5 py-5">
-					<BrandLogo />
-				</div>
+				<LoginSection />
 				<LoginHero />
 			</div>
 		</main>
