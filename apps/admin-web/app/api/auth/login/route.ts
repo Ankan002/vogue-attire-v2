@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { compare } from "bcrypt";
 import jwt from "jsonwebtoken";
-import { Controller } from "types/api";
+import { ApiResponse, Controller } from "types/api";
 
 const PostBodySchema = z.object({
 	email: z.string().email("Please provide a valid email"),
@@ -13,7 +13,7 @@ const PostBodySchema = z.object({
 		.max(30, "Password should be at most 30 characters long"),
 });
 
-export const POST: Controller<Body> = async (req) => {
+export const POST: Controller = async (req) => {
 	try {
 		const requestBody = await req.json();
 
@@ -101,7 +101,7 @@ export const POST: Controller<Body> = async (req) => {
 			process.env["JWT_SECRET"] ?? "",
 		);
 
-		const response = NextResponse.json(
+		const response = NextResponse.json<ApiResponse>(
 			{
 				success: true,
 				code: 200,
@@ -136,7 +136,7 @@ export const POST: Controller<Body> = async (req) => {
 				{
 					status: 400,
 				},
-			).json();
+			);
 		}
 
 		console.log(error);
@@ -150,6 +150,6 @@ export const POST: Controller<Body> = async (req) => {
 			{
 				status: 500,
 			},
-		).json();
+		);
 	}
 };

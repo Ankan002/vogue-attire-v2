@@ -22,8 +22,6 @@
     "exactOptionalPropertyTypes": true,
     "noEmit": true,
     "forceConsistentCasingInFileNames": true,
-		"noImplicitThis": true,
-		"noPropertyAccessFromIndexSignature": true,
 		"noUnusedLocals": true,
   }
 }
