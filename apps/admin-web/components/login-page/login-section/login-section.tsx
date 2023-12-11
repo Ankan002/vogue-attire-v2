@@ -1,11 +1,11 @@
-import { BrandLogo } from "@/components/common";
+import { AdminLogo } from "brand-kit/logos";
 import Image from "next/image";
 import LoginHeroMobile from "@/assets/images/login/login-hero-mobile.jpeg";
 
 const LoginSection = () => {
 	return (
 		<div className="flex-1 flex flex-col min-h-screen px-5 py-5">
-			<BrandLogo />
+			<AdminLogo />
 
 			<div className="w-full h-full items-center lg:justify-center justify-start mt-4 flex flex-col font-geist-sans">
 				<Image
