@@ -23,6 +23,7 @@ export const tailwindConfig: Config = {
 				"secondary-light": "#F1F2F6",
 				white: "#FFFFFF",
 				"light-gray": "#F1F1F1",
+				"secondary-gray": "#B6BBC4",
 				"dark-gray": "#888",
 				"light-cyan": "#E3F6FD",
 				thistle: "#E8DEF5",

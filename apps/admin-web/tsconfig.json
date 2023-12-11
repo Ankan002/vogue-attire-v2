@@ -8,14 +8,16 @@
 		],
 		"paths": {
 			"@/*": ["./*"]
-		}
+		},
+		"typeRoots": ["node_modules/@types"]
 	},
 	"include": [
 		"next-env.d.ts",
 		"**/*.ts",
 		"**/*.tsx",
 		".next/types/**/*.ts",
-		"next.config.js"
-, "seeders/admin-seeder.ts"	],
+		"next.config.js",
+		"seeders/admin-seeder.ts"
+	],
 	"exclude": ["node_modules"]
 }

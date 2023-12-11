@@ -3,7 +3,8 @@
 	"version": "0.0.0",
 	"exports": {
 		".": "./tailwind-config.ts",
-		"./font": "./css/fonts.css"
+		"./font": "./css/fonts.css",
+		"./colors": "./colors.ts"
 	},
 	"devDependencies": {
 		"tailwindcss": "^3.3.5"

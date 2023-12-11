@@ -8,7 +8,7 @@ const ThemeToggleBtn = () => {
 
 	return (
 		<button
-			className="fixed bottom-5 right-5 border border-primary-dark dark:border-primary-light text-primary-dark dark:text-primary-light p-1.5 flex items-center justify-center transition-none rounded-lg"
+			className="fixed md:bottom-6 md:right-6 bottom-5 right-5 border border-primary-dark dark:border-primary-light text-primary-dark dark:text-primary-light p-1.5 flex items-center justify-center transition-none rounded-lg bg-primary-light dark:bg-primary-dark"
 			onClick={onToggleClick}
 			aria-label="Theme Toggle Button"
 		>

@@ -3,10 +3,13 @@
 	"license": "MIT",
 	"version": "0.0.0",
 	"exports": {
-		"./common": "./common/index.ts"
+		"./common": "./common/index.ts",
+		"./api": "./api/index.ts"
 	},
 	"devDependencies": {
-		"typescript": "^5.3.2",
-		"@repo/typescript-config": "*"
-	}
+		"@repo/typescript-config": "*",
+		"next": "^14.0.4",
+		"typescript": "^5.3.2"
+	},
+	"dependencies": {}
 }
