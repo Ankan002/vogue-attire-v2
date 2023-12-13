@@ -1,6 +1,7 @@
 import { AdminLogo } from "brand-kit/logos";
 import Image from "next/image";
 import LoginHeroMobile from "@/assets/images/login/login-hero-mobile.jpeg";
+import { Skeleton } from "ui/shad-cn";
 
 const LoginSection = () => {
 	return (
@@ -24,6 +25,8 @@ const LoginSection = () => {
 						You will never lose if you never give up. Let's sign in
 						to change the industry.
 					</p>
+
+					<Skeleton className="w-40 h-20 bg-rose-pink dark:bg-primary-red" />
 				</div>
 			</div>
 		</div>

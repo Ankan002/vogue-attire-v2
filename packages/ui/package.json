@@ -2,6 +2,9 @@
 	"name": "ui",
 	"license": "MIT",
 	"version": "0.0.0",
+	"exports": {
+		"./shad-cn": "./components/ui/index.ts"
+	},
 	"devDependencies": {
 		"@repo/eslint-config": "*",
 		"@repo/typescript-config": "*",
