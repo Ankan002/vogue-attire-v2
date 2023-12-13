@@ -8,6 +8,7 @@ const config: Config = {
 		"./components/**/*.{js,ts,jsx,tsx,mdx}",
 		"./app/**/*.{js,ts,jsx,tsx,mdx}",
 		"../../packages/brand-kit/**/*.{js,ts,jsx,tsx,mdx}",
+		"../../packages/ui/**/*.{js,ts,jsx,tsx,mdx}",
 	],
 };
 

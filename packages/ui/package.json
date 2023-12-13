@@ -1,0 +1,23 @@
+{
+	"name": "ui",
+	"license": "MIT",
+	"version": "0.0.0",
+	"devDependencies": {
+		"@repo/eslint-config": "*",
+		"@repo/typescript-config": "*",
+		"@types/node": "^20.10.4",
+		"@types/react": "^18.2.45",
+		"autoprefixer": "^10.4.16",
+		"postcss": "^8.4.32",
+		"react": "^18.2.0",
+		"tailwind": "^4.0.0"
+	},
+	"dependencies": {
+		"class-variance-authority": "^0.7.0",
+		"clsx": "^2.0.0",
+		"lucide-react": "^0.294.0",
+		"tailwind-config": "*",
+		"tailwind-merge": "^2.1.0",
+		"tailwindcss-animate": "^1.0.7"
+	}
+}
