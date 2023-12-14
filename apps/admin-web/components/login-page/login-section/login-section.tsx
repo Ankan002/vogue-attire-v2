@@ -1,9 +1,14 @@
+"use client";
+
 import { AdminLogo } from "brand-kit/logos";
 import Image from "next/image";
 import LoginHeroMobile from "@/assets/images/login/login-hero-mobile.jpeg";
-import { Skeleton } from "ui/shad-cn";
+import { TextInput } from "ui/elements";
+import { useLoginSection } from "./hook";
 
 const LoginSection = () => {
+	const { email, onEmailChange } = useLoginSection();
+
 	return (
 		<div className="flex-1 flex flex-col min-h-screen px-5 py-5">
 			<AdminLogo />
@@ -26,7 +31,16 @@ const LoginSection = () => {
 						to change the industry.
 					</p>
 
-					<Skeleton className="w-40 h-20 bg-rose-pink dark:bg-primary-red" />
+					{/* <Skeleton className="w-40 h-20 bg-rose-pink dark:bg-primary-red" /> */}
+
+					<TextInput
+						title="Email"
+						value={email}
+						onChange={onEmailChange}
+						className="mt-6"
+						placeholder="abc@gmail.com"
+						inputClassName="tracking-wider text-base"
+					/>
 				</div>
 			</div>
 		</div>

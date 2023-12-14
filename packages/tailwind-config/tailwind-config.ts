@@ -43,6 +43,7 @@ export const tailwindConfig: Config = {
 			colors: {
 				"primary-light": "#F4F6FA",
 				"secondary-light": "#F1F2F6",
+				"tertiary-light": "#f3f9fa",
 				white: "#FFFFFF",
 				"light-gray": "#F1F1F1",
 				"secondary-gray": "#B6BBC4",

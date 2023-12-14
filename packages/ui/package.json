@@ -3,7 +3,8 @@
 	"license": "MIT",
 	"version": "0.0.0",
 	"exports": {
-		"./shad-cn": "./components/ui/index.ts"
+		"./shad-cn": "./components/ui/index.ts",
+		"./elements": "./components/elements/index.ts"
 	},
 	"devDependencies": {
 		"@repo/eslint-config": "*",
