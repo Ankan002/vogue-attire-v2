@@ -3,11 +3,18 @@
 import { AdminLogo } from "brand-kit/logos";
 import Image from "next/image";
 import LoginHeroMobile from "@/assets/images/login/login-hero-mobile.jpeg";
-import { TextInput } from "ui/elements";
+import { PasswordInput, TextInput } from "ui/elements";
 import { useLoginSection } from "./hook";
 
 const LoginSection = () => {
-	const { email, onEmailChange } = useLoginSection();
+	const {
+		email,
+		onEmailChange,
+		password,
+		onPasswordChange,
+		isPasswordVisible,
+		togglePasswordVisible,
+	} = useLoginSection();
 
 	return (
 		<div className="flex-1 flex flex-col min-h-screen px-5 py-5">
@@ -40,6 +47,17 @@ const LoginSection = () => {
 						className="mt-6"
 						placeholder="abc@gmail.com"
 						inputClassName="tracking-wider text-base"
+					/>
+
+					<PasswordInput
+						title="Password"
+						value={password}
+						onChange={onPasswordChange}
+						className="mt-3"
+						placeholder="••••••••••••"
+						inputClassName="tracking-wider text-base"
+						passwordVisible={isPasswordVisible}
+						togglePasswordVisibility={togglePasswordVisible}
 					/>
 				</div>
 			</div>
