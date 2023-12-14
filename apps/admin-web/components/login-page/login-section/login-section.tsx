@@ -1,8 +1,21 @@
+"use client";
+
 import { AdminLogo } from "brand-kit/logos";
 import Image from "next/image";
 import LoginHeroMobile from "@/assets/images/login/login-hero-mobile.jpeg";
+import { PasswordInput, TextInput } from "ui/elements";
+import { useLoginSection } from "./hook";
 
 const LoginSection = () => {
+	const {
+		email,
+		onEmailChange,
+		password,
+		onPasswordChange,
+		isPasswordVisible,
+		togglePasswordVisible,
+	} = useLoginSection();
+
 	return (
 		<div className="flex-1 flex flex-col min-h-screen px-5 py-5">
 			<AdminLogo />
@@ -24,6 +37,28 @@ const LoginSection = () => {
 						You will never lose if you never give up. Let's sign in
 						to change the industry.
 					</p>
+
+					{/* <Skeleton className="w-40 h-20 bg-rose-pink dark:bg-primary-red" /> */}
+
+					<TextInput
+						title="Email"
+						value={email}
+						onChange={onEmailChange}
+						className="mt-6"
+						placeholder="abc@gmail.com"
+						inputClassName="tracking-wider text-base"
+					/>
+
+					<PasswordInput
+						title="Password"
+						value={password}
+						onChange={onPasswordChange}
+						className="mt-3"
+						placeholder="••••••••••••"
+						inputClassName="tracking-wider text-base"
+						passwordVisible={isPasswordVisible}
+						togglePasswordVisibility={togglePasswordVisible}
+					/>
 				</div>
 			</div>
 		</div>
