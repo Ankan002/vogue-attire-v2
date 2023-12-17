@@ -69,7 +69,8 @@ export const middleware = (request: NextRequest) => {
 	} else {
 		for (const route of unprotected_routes) {
 			if (currentRoute === route) {
-				if (cookie) return NextResponse.redirect("/");
+				if (cookie)
+					return NextResponse.redirect(process.env["NEXT_URL"] ?? "");
 				return NextResponse.next();
 			}
 		}
@@ -77,14 +78,18 @@ export const middleware = (request: NextRequest) => {
 		for (const route of protected_route_matchers) {
 			if (currentRoute.startsWith(route)) {
 				if (cookie) return NextResponse.next();
-				return NextResponse.redirect("/login");
+				return NextResponse.redirect(
+					`${process.env["NEXT_URL"] ?? ""}/login`,
+				);
 			}
 		}
 
 		for (const route of protected_routes) {
 			if (currentRoute === route) {
 				if (cookie) return NextResponse.next();
-				return NextResponse.redirect("/login");
+				return NextResponse.redirect(
+					`${process.env["NEXT_URL"] ?? ""}/login`,
+				);
 			}
 		}
 

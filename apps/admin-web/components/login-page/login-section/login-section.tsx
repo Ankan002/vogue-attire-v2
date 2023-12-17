@@ -14,6 +14,7 @@ const LoginSection = () => {
 		onPasswordChange,
 		isPasswordVisible,
 		togglePasswordVisible,
+		onLoginClick,
 	} = useLoginSection();
 
 	return (
@@ -58,7 +59,11 @@ const LoginSection = () => {
 						togglePasswordVisibility={togglePasswordVisible}
 					/>
 
-					<SolidButton title="Sign In" className="mt-4" />
+					<SolidButton
+						title="Sign In"
+						className="mt-4"
+						onClick={onLoginClick}
+					/>
 				</div>
 			</div>
 		</div>
