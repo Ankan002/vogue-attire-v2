@@ -1,4 +1,4 @@
-import { authAtom } from "@/atoms";
+import { authAtom, authStateLoadAtom } from "@/atoms";
 import { useLogin } from "@/services/api/auth";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -9,11 +9,17 @@ export const useLoginSection = () => {
 	const [password, setPassword] = useState<string>("");
 	const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
 	const setAuthenticated = useSetRecoilState<boolean>(authAtom);
+	const isAuthStateLoaded = useSetRecoilState<boolean>(authStateLoadAtom);
 
 	const { login, isLoggingIn } = useLogin();
 	const router = useRouter();
 
 	const onLoginClick = async () => {
+		if (!isAuthStateLoaded) {
+			console.log("We are loading the app hold on!!");
+			return;
+		}
+
 		if (isLoggingIn) {
 			// TODO: Add the toast here for error handling;
 			console.log("We are logging you in... Hold on!!");

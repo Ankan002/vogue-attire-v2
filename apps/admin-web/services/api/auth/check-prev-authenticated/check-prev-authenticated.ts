@@ -29,7 +29,7 @@ const checkPrevAuthenticated = async () => {
 	}
 };
 
-export const useCheckPrevAuthenticated = async () => {
+export const useCheckPrevAuthenticated = () => {
 	const { refetch, isLoading, error, data } = useQuery({
 		queryKey: ["check-authenticated"],
 		queryFn: checkPrevAuthenticated,
@@ -45,6 +45,6 @@ export const useCheckPrevAuthenticated = async () => {
 		checkPrevAuthenticated: checkPrevAuthenticatedFn,
 		isCheckingPrevAuthenticated: isLoading,
 		prevAuthCheckingError: error,
-		isPreviouslyAuthenticated: data,
+		previouslyAuthenticatedResponse: data,
 	};
 };
