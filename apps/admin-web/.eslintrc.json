@@ -8,5 +8,14 @@
 	"env": {
 		"browser": true,
 		"node": true
+	},
+	"plugins": ["@tanstack/eslint-plugin-query"],
+	"rules": {
+		"no-unused-vars": [
+			"error",
+			{
+				"args": "none"
+			}
+		]
 	}
 }

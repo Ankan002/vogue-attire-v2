@@ -4,7 +4,8 @@ import { GeistMono } from "geist/font/mono";
 import "./globals.css";
 import { RecoilProvider, ReactQueryProvider } from "common-providers";
 import { ThemeProvider } from "@/components/providers";
-import { ThemeToggleBtn } from "@/components/common";
+import { PrevAuthChecker, ThemeToggleBtn } from "@/components/common";
+import { CustomToaster } from "@/components/elements";
 
 export const metadata: Metadata = {
 	title: "Vogue Attire Admin",
@@ -22,6 +23,8 @@ export default function RootLayout({
 				<ReactQueryProvider>
 					<RecoilProvider>
 						<ThemeProvider>
+							<PrevAuthChecker />
+							<CustomToaster />
 							{children}
 							<ThemeToggleBtn />
 						</ThemeProvider>

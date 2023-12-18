@@ -3,7 +3,7 @@
 import { AdminLogo } from "brand-kit/logos";
 import Image from "next/image";
 import LoginHeroMobile from "@/assets/images/login/login-hero-mobile.jpeg";
-import { PasswordInput, TextInput } from "ui/elements";
+import { PasswordInput, SolidButton, TextInput } from "ui/elements";
 import { useLoginSection } from "./hook";
 
 const LoginSection = () => {
@@ -14,6 +14,7 @@ const LoginSection = () => {
 		onPasswordChange,
 		isPasswordVisible,
 		togglePasswordVisible,
+		onLoginClick,
 	} = useLoginSection();
 
 	return (
@@ -38,8 +39,6 @@ const LoginSection = () => {
 						to change the industry.
 					</p>
 
-					{/* <Skeleton className="w-40 h-20 bg-rose-pink dark:bg-primary-red" /> */}
-
 					<TextInput
 						title="Email"
 						value={email}
@@ -58,6 +57,12 @@ const LoginSection = () => {
 						inputClassName="tracking-wider text-base"
 						passwordVisible={isPasswordVisible}
 						togglePasswordVisibility={togglePasswordVisible}
+					/>
+
+					<SolidButton
+						title="Sign In"
+						className="mt-4"
+						onClick={onLoginClick}
 					/>
 				</div>
 			</div>
