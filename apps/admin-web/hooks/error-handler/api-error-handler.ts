@@ -1,5 +1,6 @@
 import { authAtom } from "@/atoms";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 import { useSetRecoilState } from "recoil";
 
 type ErrorHandlerFunc = (error: Error) => void;
@@ -8,11 +9,11 @@ export const useAPIErrorHandler = () => {
 	const router = useRouter();
 	const setIsAuthenticated = useSetRecoilState<boolean>(authAtom);
 
-	const protectedAPIHandlerError =
+	const protectedAPIErrorHandler =
 		(customHandler?: ErrorHandlerFunc) => (error: unknown) => {
-			// TODO: Add toast handler.
 			if (error instanceof Error) {
 				if (error.message === "401") {
+					toast.error("You are not authenticated!!");
 					setIsAuthenticated(false);
 					router.replace("/login");
 					return;
@@ -23,18 +24,18 @@ export const useAPIErrorHandler = () => {
 					return;
 				}
 
-				console.log(error.message);
+				toast.error(error.message);
 				return;
 			}
 
-			console.log("Some Error Ocurred!!");
+			toast.error("Some Error Ocurred!!");
 		};
 
-	const unprotectedAPIHandlerError =
+	const unprotectedAPIErrorHandler =
 		(customHandler?: ErrorHandlerFunc) => (error: unknown) => {
-			// TODO: Add toast handler.
 			if (error instanceof Error) {
 				if (error.message === "401") {
+					toast.error("You are already authenticated!!");
 					setIsAuthenticated(true);
 					router.replace("/");
 					return;
@@ -45,32 +46,31 @@ export const useAPIErrorHandler = () => {
 					return;
 				}
 
-				console.log(error.message);
+				toast.error(error.message);
 				return;
 			}
 
-			console.log("Some Error Ocurred!!");
+			toast.error("Some Error Ocurred!!");
 		};
 
-	const APIHandlerError =
+	const APIErrorHandler =
 		(customHandler?: ErrorHandlerFunc) => (error: unknown) => {
-			// TODO: Add toast handler.
 			if (error instanceof Error) {
 				if (customHandler) {
 					customHandler(error);
 					return;
 				}
 
-				console.log(error.message);
+				toast.error(error.message);
 				return;
 			}
 
-			console.log("Some Error Ocurred!!");
+			toast.error("Some Error Ocurred!!");
 		};
 
 	return {
-		protectedAPIHandlerError,
-		unprotectedAPIHandlerError,
-		APIHandlerError,
+		protectedAPIErrorHandler,
+		unprotectedAPIErrorHandler,
+		APIErrorHandler,
 	};
 };
