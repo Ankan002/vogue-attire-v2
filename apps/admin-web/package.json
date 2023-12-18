@@ -10,9 +10,10 @@
 		"db-seed:admin": "npx tsx seeders/admin-seeder.ts"
 	},
 	"dependencies": {
+		"@tanstack/react-query": "^5.14.1",
 		"bcrypt": "^5.1.1",
-		"common-providers": "*",
 		"brand-kit": "*",
+		"common-providers": "*",
 		"database": "*",
 		"geist": "^1.2.0",
 		"jsonwebtoken": "^9.0.2",
@@ -20,16 +21,16 @@
 		"next": "14.0.4",
 		"react": "^18",
 		"react-dom": "^18",
-		"react-query": "^3.39.3",
 		"recoil": "^0.7.7",
 		"tailwind-config": "*",
 		"tailwind-merge": "^2.1.0",
-		"zod": "^3.22.4",
-		"ui": "*"
+		"ui": "*",
+		"zod": "^3.22.4"
 	},
 	"devDependencies": {
 		"@repo/eslint-config": "*",
 		"@repo/typescript-config": "*",
+		"@tanstack/eslint-plugin-query": "^5.12.1",
 		"@types/bcrypt": "^5.0.2",
 		"@types/jsonwebtoken": "^9.0.5",
 		"@types/node": "^20",

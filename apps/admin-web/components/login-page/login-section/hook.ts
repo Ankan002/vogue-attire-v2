@@ -1,11 +1,14 @@
+import { authAtom } from "@/atoms";
 import { useLogin } from "@/services/api/auth";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useSetRecoilState } from "recoil";
 
 export const useLoginSection = () => {
 	const [email, setEmail] = useState<string>("");
 	const [password, setPassword] = useState<string>("");
 	const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
+	const setAuthenticated = useSetRecoilState<boolean>(authAtom);
 
 	const { login, isLoggingIn } = useLogin();
 	const router = useRouter();
@@ -42,6 +45,7 @@ export const useLoginSection = () => {
 
 			// TODO: Add success toasts, also auth states and some manager flows!!
 
+			setAuthenticated(true);
 			router.replace("/");
 		} catch (error) {
 			// TODO: Create a error handler hook

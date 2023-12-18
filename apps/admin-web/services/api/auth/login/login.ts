@@ -1,4 +1,5 @@
-import { useMutation } from "react-query";
+import { useMutation } from "@tanstack/react-query";
+import { AsyncMutationFunction } from "types/react-query";
 
 interface Args {
 	email: string;
@@ -36,13 +37,20 @@ const login = async (args: Args) => {
 	}
 };
 
-export const useLogin = () => {
-	const { mutateAsync, isLoading } = useMutation("login", login, {
+interface HookResponse {
+	login: AsyncMutationFunction<boolean, Args>;
+	isLoggingIn: boolean;
+}
+
+export const useLogin = (): HookResponse => {
+	const { mutateAsync, isPending } = useMutation({
+		mutationKey: ["login"],
+		mutationFn: login,
 		retry: 0,
 	});
 
 	return {
 		login: mutateAsync,
-		isLoggingIn: isLoading,
+		isLoggingIn: isPending,
 	};
 };
