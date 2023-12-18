@@ -15,9 +15,9 @@ export const usePrevAuthChecker = () => {
 	const setIsAuthenticated = useSetRecoilState<boolean>(authAtom);
 	const setPrevAuthStateLoaded =
 		useSetRecoilState<boolean>(authStateLoadAtom);
-	const { APIHandlerError } = useAPIErrorHandler();
+	const { APIErrorHandler } = useAPIErrorHandler();
 
-	const prevAuthCheckingErrorHandler = APIHandlerError();
+	const prevAuthCheckingErrorHandler = APIErrorHandler();
 
 	useEffect(() => {
 		if (isAppMounted.current) return;
@@ -33,7 +33,6 @@ export const usePrevAuthChecker = () => {
 	}, [prevAuthCheckingError]);
 
 	useEffect(() => {
-		console.log(previouslyAuthenticatedResponse);
 		if (previouslyAuthenticatedResponse !== undefined) {
 			setIsAuthenticated(previouslyAuthenticatedResponse.isAuthenticated);
 			setPrevAuthStateLoaded(false);

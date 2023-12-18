@@ -1,7 +1,9 @@
 import { authAtom, authStateLoadAtom } from "@/atoms";
+import { useAPIErrorHandler } from "@/hooks";
 import { useLogin } from "@/services/api/auth";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { useSetRecoilState } from "recoil";
 
 export const useLoginSection = () => {
@@ -14,53 +16,50 @@ export const useLoginSection = () => {
 	const { login, isLoggingIn } = useLogin();
 	const router = useRouter();
 
+	const { unprotectedAPIErrorHandler } = useAPIErrorHandler();
+	const loginAPIErrorHandler = unprotectedAPIErrorHandler();
+
 	const onLoginClick = async () => {
 		if (!isAuthStateLoaded) {
-			console.log("We are loading the app hold on!!");
+			toast.error("We are loading the app hold on!!");
 			return;
 		}
 
 		if (isLoggingIn) {
-			// TODO: Add the toast here for error handling;
-			console.log("We are logging you in... Hold on!!");
+			toast.error("We are logging you in... Hold on!!");
 			return;
 		}
 
 		if (email.length < 3) {
-			console.log("Enter a valid email!!");
+			toast.error("Enter a valid email!!");
 			return;
 		}
 
 		if (password.length < 8 || password.length > 30) {
-			console.log("Email length cannot be less than 8 or more than 30");
+			toast.error("Email length cannot be less than 8 or more than 30");
 			return;
 		}
 
-		// TODO: Add toast loaders here!!
-
 		try {
+			toast.loading("Logging In...");
 			const response = await login({
 				email,
 				password,
 			});
 
+			toast.dismiss();
+
 			if (!response) {
-				console.log("Something went Wrong!!");
+				toast.error("Something went Wrong!!");
 				return;
 			}
 
-			// TODO: Add success toasts, also auth states and some manager flows!!
-
+			toast.success("Welcome Master!!");
 			setAuthenticated(true);
 			router.replace("/");
 		} catch (error) {
-			// TODO: Create a error handler hook
-			if (error instanceof Error) {
-				console.log(error.message);
-				return;
-			}
-
-			console.log("Something went wrong!!");
+			toast.dismiss();
+			loginAPIErrorHandler(error);
 		}
 	};
 

@@ -111,8 +111,6 @@ export const POST: Controller = async (req) => {
 			},
 		);
 
-		console.log(process.env["COOKIE_NAME"]);
-
 		response.cookies.set(
 			process.env["COOKIE_NAME"] ?? "auth-token",
 			jwtToken,
