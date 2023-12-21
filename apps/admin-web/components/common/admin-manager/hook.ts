@@ -18,7 +18,8 @@ export const useAdminManager = () => {
 		useGetCurrentAdmin();
 
 	useEffect(() => {
-		if (isAuthenticated && !fetchingAdminData) {
+		if (isAuthenticated || !fetchingAdminData) {
+			console.log("CALL MADE!!");
 			getCurrentAdmin();
 		}
 	}, [isAuthenticated]);

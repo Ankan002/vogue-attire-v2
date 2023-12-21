@@ -1,15 +1,10 @@
 "use client";
 
-import { useEffect } from "react";
 import { useSidebar } from "./hook";
 import { SidebarLogoutBtn } from "..";
 
 const Sidebar = () => {
 	const { isMenuActive } = useSidebar();
-
-	useEffect(() => {
-		console.log(isMenuActive);
-	}, [isMenuActive]);
 
 	return (
 		<div
