@@ -5,12 +5,20 @@ import Link from "next/link";
 import { useNavbar } from "./hook";
 import { Skeleton } from "ui/shad-cn";
 import Image from "next/image";
+import { Menu } from "lucide-react";
 
 const Navbar = () => {
 	const { admin, isAdminLoading } = useNavbar();
 
 	return (
-		<nav className="w-full flex px-3 py-2 fixed top-0 left-0 items-center z-20 bg-white dark:bg-primary-dark">
+		<nav className="w-full flex px-3 py-2 fixed top-0 left-0 items-center z-30 bg-white dark:bg-primary-dark">
+			<button
+				className="mr-2 text-primary-dark dark:text-primary-light"
+				aria-label="menu toggle button"
+			>
+				<Menu size={20} />
+			</button>
+
 			<Link href="/">
 				<AdminLogo />
 			</Link>
