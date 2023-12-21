@@ -38,7 +38,7 @@ export const useSidebarLogoutBtn = () => {
 			setAdmin(null);
 			setIsAuthenticated(false);
             // TODO: fall back to default next js routing once the routing bug is resolved!!
-			window.location.replace("/");
+			window.location.replace("/login");
 		} catch (error) {
 			logoutErrorHandler(error);
 		}
