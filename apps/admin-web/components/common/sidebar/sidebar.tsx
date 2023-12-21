@@ -13,9 +13,13 @@ const Sidebar = () => {
 	return (
 		<div
 			className={`${
-				isMenuActive ? "flex" : "hidden"
-			} flex-col lg:w-64 w-56 h-screen fixed top-0 left-0 bg-primary-orange z-20`}
-		></div>
+				isMenuActive ? "lg:w-64 w-56" : "w-16"
+			} flex flex-col  h-screen fixed top-0 left-0 z-20 px-1 pt-14 bg-secondary-light dark:bg-secondary-dark`}
+		>
+			<div className="flex-grow "></div>
+
+			<button className="my-1"></button>
+		</div>
 	);
 };
 
