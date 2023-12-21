@@ -1,5 +1,4 @@
 import { checkAuthenticated } from "@/server-utils";
-import { error } from "console";
 import { NextResponse } from "next/server";
 import { ApiResponse, Controller } from "types/api";
 
@@ -46,18 +45,16 @@ export const POST: Controller = async (request) => {
 				},
 			);
 		}
+
+		return NextResponse.json(
+			{
+				success: false,
+				error: "Internal Server Error!!",
+				code: 500,
+			},
+			{
+				status: 500,
+			},
+		);
 	}
-
-	console.log(error);
-
-	return NextResponse.json(
-		{
-			success: false,
-			error: "Internal Server Error!!",
-			code: 500,
-		},
-		{
-			status: 500,
-		},
-	);
 };

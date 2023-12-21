@@ -6,17 +6,27 @@ export const GET: Controller = async (request) => {
 		?.value;
 
 	if (!authCookie) {
-		return NextResponse.json({
-			success: false,
-			error: "Not Logged In!!",
-			code: 400,
-		});
+		return NextResponse.json(
+			{
+				success: false,
+				error: "Not Logged In!!",
+				code: 400,
+			},
+			{
+				status: 400,
+			},
+		);
 	}
 
-	return NextResponse.json({
-		success: true,
-		code: 200,
-	});
+	return NextResponse.json(
+		{
+			success: true,
+			code: 200,
+		},
+		{
+			status: 200,
+		},
+	);
 };
 
 export const revalidate = 0;
