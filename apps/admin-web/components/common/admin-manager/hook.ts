@@ -1,4 +1,4 @@
-import { adminAtom, authAtom } from "@/atoms";
+import { adminAtom, adminLoadingAtom, authAtom } from "@/atoms";
 import { useAPIErrorHandler } from "@/hooks";
 import { useGetCurrentAdmin } from "@/services/api/admin";
 import { DerivedAdmin } from "@/types/derived";
@@ -6,10 +6,9 @@ import { useEffect } from "react";
 import { useSetRecoilState, useRecoilValue } from "recoil";
 
 export const useAdminManager = () => {
-	const setCurrentAdmin = useSetRecoilState<DerivedAdmin | null>(
-		adminAtom,
-	);
+	const setCurrentAdmin = useSetRecoilState<DerivedAdmin | null>(adminAtom);
 	const isAuthenticated = useRecoilValue<boolean>(authAtom);
+	const setIsAdminLoading = useSetRecoilState<boolean>(adminLoadingAtom);
 	const { protectedAPIErrorHandler } = useAPIErrorHandler();
 
 	const getAdminErrorHandler = protectedAPIErrorHandler();
@@ -34,4 +33,8 @@ export const useAdminManager = () => {
 			setCurrentAdmin(adminData);
 		}
 	}, [adminData]);
+
+	useEffect(() => {
+		setIsAdminLoading(fetchingAdminData);
+	}, [fetchingAdminData]);
 };
