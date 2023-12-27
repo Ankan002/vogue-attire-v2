@@ -2,7 +2,20 @@
 	"extends": "@repo/eslint-config/next.js",
 	"parser": "@typescript-eslint/parser",
 	"root": true,
+	"env": {
+		"node": true,
+		"browser": true
+	},
 	"parserOptions": {
 		"project": true
+	},
+	"plugins": ["@tanstack/eslint-plugin-query"],
+	"rules": {
+		"no-unused-vars": [
+			"error",
+			{
+				"args": "none"
+			}
+		]
 	}
 }

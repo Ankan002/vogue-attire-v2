@@ -4,6 +4,7 @@ import { GeistSans } from "geist/font/sans";
 import { RecoilProvider, ReactQueryProvider } from "common-providers";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers";
+import { ThemeToggleBtn } from "@/components/common";
 
 export const metadata: Metadata = {
 	title: "Vogue Attire",
@@ -20,7 +21,10 @@ export default function RootLayout({
 			<body className={`${GeistSans.variable} ${GeistMono.variable}`}>
 				<ReactQueryProvider>
 					<RecoilProvider>
-						<ThemeProvider>{children}</ThemeProvider>
+						<ThemeProvider>
+							{children}
+							<ThemeToggleBtn />
+						</ThemeProvider>
 					</RecoilProvider>
 				</ReactQueryProvider>
 			</body>
