@@ -6,8 +6,8 @@ export const metadata: Metadata = {
 
 const LoginPage = () => {
 	return (
-		<main className="flex min-h-screen flex-col items-center justify-center bg-white dark:bg-primary-dark text-primary-dark dark:text-primary-light font-geist-sans text-xl">
-			Login Page
+		<main className="w-full min-h-screen flex flex-col bg-primary-light dark:bg-primary-dark font-geist-sans">
+			<div className="w-full flex min-h-screen"></div>
 		</main>
 	);
 };
