@@ -1,3 +1,4 @@
+import { LoginHero, LoginSection } from "@/components/login-page";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -7,7 +8,10 @@ export const metadata: Metadata = {
 const LoginPage = () => {
 	return (
 		<main className="w-full min-h-screen flex flex-col bg-primary-light dark:bg-primary-dark font-geist-sans">
-			<div className="w-full flex min-h-screen"></div>
+			<div className="w-full flex min-h-screen">
+				<LoginSection />
+				<LoginHero />
+			</div>
 		</main>
 	);
 };
