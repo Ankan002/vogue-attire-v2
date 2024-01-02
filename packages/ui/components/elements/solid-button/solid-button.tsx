@@ -1,6 +1,7 @@
 "use client";
 
 import { IconType } from "react-icons";
+import { LucideIcon } from "lucide-react";
 import { twMerge } from "tailwind-merge";
 import Link from "next/link";
 
@@ -9,10 +10,10 @@ interface SolidButtonCoreProps {
 	onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 	className?: string;
 	textClassName?: string;
-	LeftIcon?: IconType;
+	LeftIcon?: IconType | LucideIcon;
 	leftIconSize?: number;
 	leftIconClassName?: string;
-	RightIcon?: IconType;
+	RightIcon?: IconType | LucideIcon;
 	rightIconSize?: number;
 	rightIconClassName?: string;
 }
@@ -40,8 +41,8 @@ const SolidButtonCore = (props: SolidButtonCoreProps) => {
 			aria-label={`${title} button`}
 			onClick={onClick}
 		>
-			{RightIcon && (
-				<RightIcon
+			{LeftIcon && (
+				<LeftIcon
 					size={rightIconSize ?? 20}
 					className={twMerge(
 						"mr-2 transition-none",
@@ -50,10 +51,12 @@ const SolidButtonCore = (props: SolidButtonCoreProps) => {
 				/>
 			)}
 
-			<p className={twMerge("text-base transition-none", textClassName)}>{title}</p>
+			<p className={twMerge("text-base transition-none", textClassName)}>
+				{title}
+			</p>
 
-			{LeftIcon && (
-				<LeftIcon
+			{RightIcon && (
+				<RightIcon
 					size={leftIconSize ?? 20}
 					className={twMerge(
 						"ml-2 transition-none",
