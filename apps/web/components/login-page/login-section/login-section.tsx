@@ -6,6 +6,8 @@ import { FaGoogle } from "react-icons/fa";
 import Image from "next/image";
 import MobileHeroImage from "@/assets/images/login/login-hero-mobile.png";
 
+// TODO: Fix the Mobile font size and styles to make it more intuitive.
+
 const LoginSection = () => {
 	return (
 		<div className="flex-1 flex flex-col min-h-screen px-5 py-5 font-geist-sans">
