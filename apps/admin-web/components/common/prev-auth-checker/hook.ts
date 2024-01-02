@@ -35,7 +35,7 @@ export const usePrevAuthChecker = () => {
 	useEffect(() => {
 		if (previouslyAuthenticatedResponse !== undefined) {
 			setIsAuthenticated(previouslyAuthenticatedResponse.isAuthenticated);
-			setPrevAuthStateLoaded(false);
+			setPrevAuthStateLoaded(true);
 		}
 	}, [previouslyAuthenticatedResponse]);
 

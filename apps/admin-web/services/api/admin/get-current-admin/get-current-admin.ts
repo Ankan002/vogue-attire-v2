@@ -44,14 +44,17 @@ export const useGetCurrentAdmin = () => {
 		queryFn: getCurrentAdmin,
 	});
 
+	console.log("Admin reactive data: ", data);
+
 	const fetchCurrentAdmin = useCallback(() => {
+		console.log("Refetching!!");
 		refetch();
 	}, [refetch]);
 
-    return {
-        getCurrentAdmin: fetchCurrentAdmin,
-        adminData: data,
-        adminFetchError: error,
-        fetchingAdminData: isLoading
-    }
+	return {
+		getCurrentAdmin: fetchCurrentAdmin,
+		adminData: data,
+		adminFetchError: error,
+		fetchingAdminData: isLoading,
+	};
 };

@@ -2,6 +2,7 @@ import { adminAtom, authAtom, menuActiveAtom } from "@/atoms";
 import { useAPIErrorHandler } from "@/hooks";
 import { useLogout } from "@/services/api/auth";
 import { DerivedAdmin } from "@/types/derived";
+// import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
@@ -9,6 +10,7 @@ export const useSidebarLogoutBtn = () => {
 	const isMenuActive = useRecoilValue<boolean>(menuActiveAtom);
 	const setAdmin = useSetRecoilState<DerivedAdmin | null>(adminAtom);
 	const setIsAuthenticated = useSetRecoilState<boolean>(authAtom);
+	// const router = useRouter();
 
 	const { protectedAPIErrorHandler } = useAPIErrorHandler();
 
@@ -38,7 +40,8 @@ export const useSidebarLogoutBtn = () => {
 			setAdmin(null);
 			setIsAuthenticated(false);
             // TODO: fall back to default next js routing once the routing bug is resolved!!
-			window.location.replace("/");
+			window.location.replace("/login");
+			// router.replace("/login");
 		} catch (error) {
 			logoutErrorHandler(error);
 		}

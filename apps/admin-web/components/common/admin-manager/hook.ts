@@ -1,4 +1,9 @@
-import { adminAtom, adminLoadingAtom, authAtom } from "@/atoms";
+import {
+	adminAtom,
+	adminLoadingAtom,
+	authAtom,
+	authStateLoadAtom,
+} from "@/atoms";
 import { useAPIErrorHandler } from "@/hooks";
 import { useGetCurrentAdmin } from "@/services/api/admin";
 import { DerivedAdmin } from "@/types/derived";
@@ -10,6 +15,7 @@ export const useAdminManager = () => {
 	const isAuthenticated = useRecoilValue<boolean>(authAtom);
 	const setIsAdminLoading = useSetRecoilState<boolean>(adminLoadingAtom);
 	const { protectedAPIErrorHandler } = useAPIErrorHandler();
+	const isAuthStateLoaded = useRecoilValue<boolean>(authStateLoadAtom);
 
 	const getAdminErrorHandler = protectedAPIErrorHandler();
 
@@ -18,11 +24,12 @@ export const useAdminManager = () => {
 		useGetCurrentAdmin();
 
 	useEffect(() => {
-		if (isAuthenticated || !fetchingAdminData) {
-			console.log("CALL MADE!!");
+		if (isAuthenticated && !fetchingAdminData && isAuthStateLoaded) {
+			console.log(isAuthenticated);
+			console.log("HIT");
 			getCurrentAdmin();
 		}
-	}, [isAuthenticated]);
+	}, [isAuthenticated, isAuthStateLoaded]);
 
 	useEffect(() => {
 		if (adminFetchError) getAdminErrorHandler(adminFetchError);

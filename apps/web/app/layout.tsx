@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { GeistMono } from "geist/font/mono";
+import { GeistSans } from "geist/font/sans";
+import { RecoilProvider, ReactQueryProvider } from "common-providers";
 import "./globals.css";
-
-const inter = Inter({ subsets: ["latin"] });
+import { ThemeProvider } from "@/components/providers";
+import { ThemeToggleBtn } from "@/components/common";
 
 export const metadata: Metadata = {
 	title: "Vogue Attire",
@@ -16,7 +18,16 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="en">
-			<body className={inter.className}>{children}</body>
+			<body className={`${GeistSans.variable} ${GeistMono.variable}`}>
+				<ReactQueryProvider>
+					<RecoilProvider>
+						<ThemeProvider>
+							{children}
+							<ThemeToggleBtn />
+						</ThemeProvider>
+					</RecoilProvider>
+				</ReactQueryProvider>
+			</body>
 		</html>
 	);
 }

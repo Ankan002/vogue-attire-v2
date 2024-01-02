@@ -1,6 +1,7 @@
 import { authAtom, authStateLoadAtom } from "@/atoms";
 import { useAPIErrorHandler } from "@/hooks";
 import { useLogin } from "@/services/api/auth";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useSetRecoilState } from "recoil";
@@ -13,6 +14,7 @@ export const useLoginSection = () => {
 	const isAuthStateLoaded = useSetRecoilState<boolean>(authStateLoadAtom);
 
 	const { login, isLoggingIn } = useLogin();
+	const router = useRouter();
 
 	const { unprotectedAPIErrorHandler } = useAPIErrorHandler();
 	const loginAPIErrorHandler = unprotectedAPIErrorHandler();
@@ -55,7 +57,8 @@ export const useLoginSection = () => {
 			toast.success("Welcome Master!!");
 			setAuthenticated(true);
 			// TODO: fall back to default next js routing once the routing bug is resolved!!
-			window.location.replace("/");
+			// window.location.replace("/");
+			router.replace("/");
 		} catch (error) {
 			console.log(error);
 			toast.dismiss();
