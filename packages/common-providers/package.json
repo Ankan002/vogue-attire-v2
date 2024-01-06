@@ -10,6 +10,6 @@
 		"recoil": "^0.7.7"
 	},
 	"dependencies": {
-		"@tanstack/react-query": "^5.14.1"
+		"@tanstack/react-query": "^5.14.6"
 	}
 }
