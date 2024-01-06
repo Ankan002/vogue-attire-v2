@@ -16,8 +16,13 @@ export const middleware = (request: NextRequest) => {
 	const currentRoute = request.nextUrl.pathname;
 
 	if (currentRoute.includes("/api")) {
+		const requestMethod = request.method;
+
 		for (const route of unprotected_api_routes) {
-			if (currentRoute === route) {
+			if (
+				currentRoute === route.route &&
+				route.methods.includes(requestMethod)
+			) {
 				if (cookie) {
 					return NextResponse.json(
 						{
@@ -36,7 +41,10 @@ export const middleware = (request: NextRequest) => {
 		}
 
 		for (const route of protected_api_route_matchers) {
-			if (currentRoute.startsWith(route)) {
+			if (
+				currentRoute.startsWith(route.route) &&
+				route.methods.includes(requestMethod)
+			) {
 				if (cookie) return NextResponse.next();
 				return NextResponse.json(
 					{
@@ -52,7 +60,10 @@ export const middleware = (request: NextRequest) => {
 		}
 
 		for (const route of protected_api_routes) {
-			if (currentRoute === route) {
+			if (
+				currentRoute === route.route &&
+				route.methods.includes(requestMethod)
+			) {
 				if (cookie) return NextResponse.next();
 				return NextResponse.json(
 					{

@@ -15,28 +15,36 @@ export const middleware = (request: NextRequest) => {
 
 	const pathname = request.nextUrl.pathname;
 
-	for (const route of unprotected_api_routes) {
-		if (route === pathname) {
-			if (authToken) {
-				return NextResponse.json(
-					{
-						success: false,
-						error: "You are already signed in!!",
-						code: 400,
-					},
-					{
-						status: 400,
-					},
-				);
-			}
-
-			return NextResponse.next();
-		}
-	}
-
 	if (pathname.includes("/api")) {
-		for (const route of protected_api_routes) {
-			if (route === pathname) {
+		const requestMethod = request.method;
+
+		for (const route of unprotected_api_routes) {
+			if (
+				route.route === pathname &&
+				route.methods.includes(requestMethod)
+			) {
+				if (authToken) {
+					return NextResponse.json(
+						{
+							success: false,
+							error: "You are already signed in!!",
+							code: 400,
+						},
+						{
+							status: 400,
+						},
+					);
+				}
+
+				return NextResponse.next();
+			}
+		}
+
+		for (const routeMatcher of protected_api_route_matchers) {
+			if (
+				pathname.startsWith(routeMatcher.route) &&
+				routeMatcher.methods.includes(requestMethod)
+			) {
 				if (!authToken) {
 					return NextResponse.json(
 						{
@@ -54,8 +62,11 @@ export const middleware = (request: NextRequest) => {
 			}
 		}
 
-		for (const routeMatcher of protected_api_route_matchers) {
-			if (pathname.startsWith(routeMatcher)) {
+		for (const route of protected_api_routes) {
+			if (
+				route.route === pathname &&
+				route.methods.includes(requestMethod)
+			) {
 				if (!authToken) {
 					return NextResponse.json(
 						{

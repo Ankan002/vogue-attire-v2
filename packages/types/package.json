@@ -5,7 +5,8 @@
 	"exports": {
 		"./common": "./common/index.ts",
 		"./api": "./api/index.ts",
-		"./react-query": "./react-query/index.ts"
+		"./react-query": "./react-query/index.ts",
+		"./route": "./route/index.ts"
 	},
 	"devDependencies": {
 		"@repo/typescript-config": "*",
