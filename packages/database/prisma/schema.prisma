@@ -83,6 +83,17 @@ model Attribute {
   product_item_attributes ProductItemAttribute[]
 }
 
+model ImageAsset {
+  id                   String         @id @default(cuid())
+  tag                  String?
+  image                String
+  created_at           DateTime       @default(now())
+  updated_at           DateTime       @updatedAt
+  thumnails_product    Product[]
+  product_images       ProductImage[]
+  images_product_items ProductItem[]
+}
+
 model Tax {
   id               String         @id @default(cuid())
   name             String
@@ -93,17 +104,29 @@ model Tax {
   order_item_taxes OrderItemTax[]
 }
 
+model ProductImage {
+  id         String     @id @default(cuid())
+  image      ImageAsset @relation(fields: [image_id], references: [id], onDelete: Cascade)
+  image_id   String
+  product    Product    @relation(fields: [product_id], references: [id], onDelete: Cascade)
+  product_id String
+  created_at DateTime   @default(now())
+  updated_at DateTime   @updatedAt()
+}
+
 model Product {
-  id            String               @id @default(cuid())
-  name          String
-  description   String
-  cover_image   String
-  is_published  Boolean              @default(false)
-  created_at    DateTime             @default(now())
-  updated_at    DateTime             @updatedAt
-  category_tags ProductCategoryTag[]
-  product_items ProductItem[]
-  taxes         ProductTax[]
+  id                 String               @id @default(cuid())
+  name               String
+  description        String
+  thumbnail          ImageAsset?          @relation(fields: [thumbnail_asset_id], references: [id], onDelete: SetNull)
+  thumbnail_asset_id String?
+  images             ProductImage[]
+  is_published       Boolean              @default(false)
+  created_at         DateTime             @default(now())
+  updated_at         DateTime             @updatedAt
+  category_tags      ProductCategoryTag[]
+  product_items      ProductItem[]
+  taxes              ProductTax[]
 }
 
 model ProductTax {
@@ -133,7 +156,8 @@ model ProductItem {
   id                      String                 @id @default(cuid())
   product                 Product                @relation(fields: [product_id], references: [id], onDelete: Cascade)
   product_id              String
-  product_image           String?
+  product_image           ImageAsset?            @relation(fields: [product_image_id], references: [id], onDelete: SetNull)
+  product_image_id        String?
   price                   Float
   marked_price            Float
   currency                String                 @default("INR")

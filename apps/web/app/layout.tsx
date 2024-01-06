@@ -3,8 +3,9 @@ import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 import { RecoilProvider, ReactQueryProvider } from "common-providers";
 import "./globals.css";
-import { ThemeProvider } from "@/components/providers";
+import { GoogleAuthProvider, ThemeProvider } from "@/components/providers";
 import { ThemeToggleBtn } from "@/components/common";
+import { CustomToaster } from "@/components/elements";
 
 export const metadata: Metadata = {
 	title: "Vogue Attire",
@@ -22,8 +23,11 @@ export default function RootLayout({
 				<ReactQueryProvider>
 					<RecoilProvider>
 						<ThemeProvider>
-							{children}
-							<ThemeToggleBtn />
+							<GoogleAuthProvider>
+								{children}
+								<ThemeToggleBtn />
+								<CustomToaster />
+							</GoogleAuthProvider>
 						</ThemeProvider>
 					</RecoilProvider>
 				</ReactQueryProvider>

@@ -2,7 +2,7 @@ import { MiddlewareAPIRoute } from "types/route";
 
 export const protected_route_matchers = [];
 
-export const protected_routes = ["/"];
+export const protected_routes = [];
 
 export const unprotected_routes = ["/login"];
 
