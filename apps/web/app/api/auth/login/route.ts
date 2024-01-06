@@ -87,10 +87,10 @@ export const POST: Controller = async (request) => {
 				{
 					success: false,
 					error: "The user is not currently active",
-					code: 401,
+					code: 403,
 				},
 				{
-					status: 401,
+					status: 403,
 				},
 			);
 		}
@@ -100,10 +100,10 @@ export const POST: Controller = async (request) => {
 				{
 					success: false,
 					error: "The user is not currently active",
-					code: 401,
+					code: 403,
 				},
 				{
-					status: 401,
+					status: 403,
 				},
 			);
 		}

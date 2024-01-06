@@ -5,8 +5,11 @@ import { SolidButton } from "ui/elements";
 import { FaGoogle } from "react-icons/fa";
 import Image from "next/image";
 import MobileHeroImage from "@/assets/images/login/login-hero-mobile.png";
+import { useLoginSection } from "./hook";
 
 const LoginSection = () => {
+	const { onLoginPress } = useLoginSection();
+
 	return (
 		<div className="flex-1 flex flex-col min-h-screen px-5 py-5 font-geist-sans">
 			<MainLogo />
@@ -41,6 +44,7 @@ const LoginSection = () => {
 						LeftIcon={FaGoogle}
 						leftIconSize={20}
 						leftIconClassName="mr-2 transition-none"
+						onClick={onLoginPress}
 					/>
 				</div>
 			</div>
