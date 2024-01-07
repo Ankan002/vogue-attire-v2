@@ -2,13 +2,23 @@
 
 import { Power } from "lucide-react";
 import { useSidebarLogoutBtn } from "./hook";
+import { twMerge } from "tailwind-merge";
 
-const SidebarLogoutBtn = () => {
+interface Props {
+	className?: string;
+}
+
+const SidebarLogoutBtn = (props: Props) => {
+	const { className } = props;
+
 	const { isMenuActive, onLogoutClick } = useSidebarLogoutBtn();
 
 	return (
 		<button
-			className="w-full flex items-center justify-center  bg-primary-red/20 text-primary-red py-2 rounded-lg"
+			className={twMerge(
+				"w-full flex items-center justify-center  bg-primary-red/20 text-primary-red py-2 rounded-lg",
+				className,
+			)}
 			aria-label="logout"
 			onClick={onLogoutClick}
 		>
