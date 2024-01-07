@@ -1,21 +1,13 @@
-import { IconType } from "react-icons";
 import {
 	Calculator,
 	Home,
 	Image,
-	LucideIcon,
 	Package,
 	ShoppingCart,
 	Tag,
 	User,
 } from "lucide-react";
-
-interface SidebarLink {
-	id: number;
-	route: string;
-	name: string;
-	Icon: IconType | LucideIcon;
-}
+import { SidebarLink } from "@/types/common";
 
 export const sidebarLinks: Array<SidebarLink> = [
 	{
