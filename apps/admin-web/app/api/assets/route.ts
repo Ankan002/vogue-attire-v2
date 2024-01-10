@@ -1,4 +1,6 @@
-import { deleteImageFile, saveImageFile } from "@/server-utils";
+import { getDbInstance } from "@/config";
+import { deleteImageFile, getCloudinary, saveImageFile } from "@/server-utils";
+import { ImageAsset } from "database";
 import { NextResponse } from "next/server";
 import { APIError, APIHandler } from "utils";
 import { z } from "zod";
@@ -7,7 +9,11 @@ const UploadAssetBodySchema = z.object({
 	tag: z.string().trim().optional(),
 });
 
-export const POST = APIHandler(async (request) => {
+interface UploadAssetResponseData {
+	imageAsset: ImageAsset;
+}
+
+export const POST = APIHandler<UploadAssetResponseData>(async (request) => {
 	const requestFormData = await request.formData();
 
 	const tag = requestFormData.get("tag");
@@ -18,10 +24,10 @@ export const POST = APIHandler(async (request) => {
 		!imageAsset ||
 		!(imageAsset instanceof File) ||
 		!imageAsset.type.startsWith("image") ||
-		imageAsset.size / (1024 * 1024) > 10
+		imageAsset.size / (1024 * 1024) > 2
 	) {
 		throw new APIError(
-			"Please provide a valid image file whose size is less than 10MB",
+			"Please provide a valid image file whose size is less than 2 MB",
 			400,
 		);
 	}
@@ -41,8 +47,27 @@ export const POST = APIHandler(async (request) => {
 	const requestBody = uploadAssetBodyValidationResult.data;
 
 	const savedFilePath = await saveImageFile(imageAsset);
+	const cloudinary = getCloudinary();
 
-	console.log(savedFilePath);
+	const uploadedImage = await cloudinary.uploader.upload(savedFilePath, {
+		folder: process.env["CLOUDINARY_FOLDER"] ?? "",
+	});
+
+	const db = getDbInstance();
+
+	const createdImageAsset = await db.imageAsset.create({
+		data: {
+			image: uploadedImage.url,
+			tag: requestBody.tag ?? null,
+		},
+		select: {
+			id: true,
+			image: true,
+			tag: true,
+			created_at: true,
+			updated_at: true,
+		},
+	});
 
 	deleteImageFile(savedFilePath);
 
@@ -50,6 +75,9 @@ export const POST = APIHandler(async (request) => {
 		{
 			success: true,
 			code: 200,
+			data: {
+				imageAsset: createdImageAsset,
+			},
 		},
 		{
 			status: 200,
