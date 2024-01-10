@@ -1,0 +1,15 @@
+{
+	"name": "utils",
+	"version": "0.0.0",
+	"license": "MIT",
+	"exports": {
+		".": "./src/index.ts"
+	},
+	"dependencies": {},
+	"devDependencies": {
+		"@repo/typescript-config": "*",
+		"next": "^14.0.4",
+		"typescript": "^5.3.3",
+		"types": "*"
+	}
+}
