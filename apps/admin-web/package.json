@@ -27,7 +27,8 @@
 		"tailwind-config": "*",
 		"tailwind-merge": "^2.1.0",
 		"ui": "*",
-		"zod": "^3.22.4"
+		"zod": "^3.22.4",
+		"utils": "*"
 	},
 	"devDependencies": {
 		"@repo/eslint-config": "*",
